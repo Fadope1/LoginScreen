@@ -20,10 +20,10 @@ class _MagicPageState extends State<MagicPage> {
           child: MovableItem(
             _offset,
             child: const Card(
-              elevation: 20,
+              elevation: 15,
               child: Padding(
                 padding: EdgeInsets.all(50.0),
-                child: Text("hello"),
+                child: Material(elevation: 20, child: Text("This is a test")),
               ),
             ),
           ),
