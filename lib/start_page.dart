@@ -10,9 +10,6 @@ class StartPage extends StatefulWidget {
   State<StatefulWidget> createState() => _StartPage();
 }
 
-/// how do i manage multiple waves
-/// setup login screen and success screen
-
 class _StartPage extends State<StartPage> {
   bool animationPlaying = true;
 
@@ -20,6 +17,9 @@ class _StartPage extends State<StartPage> {
   double rateBlue = defaultWavePos;
   double rateOrange = defaultWavePos + 200;
   double rateYellow = defaultWavePos + 500;
+
+  bool firstRun =
+      true; // rather its the first time running the app -> only run certain animations once
 
   bool animateRight = false;
 
@@ -46,34 +46,6 @@ class _StartPage extends State<StartPage> {
     double rightOffset = animateRight ? 0 : -1000;
     double leftOffset = animateRight ? -1000 : 0;
     Size window = MediaQuery.of(context).size;
-
-    Widget login2BackButton = AnimatedPositioned(
-      top: animateRight ? 10 : 50,
-      left: animateRight ? 10 : 50,
-      duration: const Duration(milliseconds: 400),
-      child: FloatingActionButton(
-        onPressed: () => setState(() {
-          rateYellow = animateRight
-              ? defaultWavePos + 500
-              : 360; // only show on right side
-          animationPlaying = true;
-          animateRight = !animateRight;
-          rateBlue = 430;
-          rateOrange = 300;
-        }),
-        child: AnimatedCrossFade(
-          crossFadeState: animateRight
-              ? CrossFadeState.showFirst
-              : CrossFadeState.showSecond,
-          duration: const Duration(milliseconds: 500),
-          firstChild: const Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Icon(Icons.arrow_back_ios),
-          ),
-          secondChild: const Icon(Icons.save),
-        ),
-      ),
-    );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -118,9 +90,9 @@ class _StartPage extends State<StartPage> {
                   },
                 ),
               ),
+              // this is the right side of the screen
               if (animateRight)
                 AnimatedOpacity(
-                  // this is the right side of the screen
                   duration: const Duration(milliseconds: 400),
                   opacity: !animationPlaying && animateRight ? 1 : 0,
                   child: ListView(
@@ -152,15 +124,17 @@ class _StartPage extends State<StartPage> {
                     ],
                   ),
                 ),
+              // this is the left side login widget
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 600),
-                top: animationPlaying ? 700 : window.width / 4,
+                top: firstRun && animationPlaying ? 700 : window.width / 4,
                 curve: Curves.fastOutSlowIn,
-                left: leftOffset + window.width / 7.35,
+                left: leftOffset,
+                right: 0,
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 1500),
                   curve: Curves.fastOutSlowIn,
-                  opacity: animationPlaying ? 0 : 1,
+                  opacity: firstRun && animationPlaying ? 0 : 1,
                   child: SizedBox(
                     width: 300,
                     child: Login(
@@ -171,12 +145,14 @@ class _StartPage extends State<StartPage> {
                           animateRight = !animateRight;
                           rateBlue = 430;
                           rateOrange = 300;
+                          firstRun = false;
                         });
                       },
                     ),
                   ),
                 ),
               ),
+              // debug floating action button topleft
               Positioned(
                 top: 0,
                 left: 0,
@@ -191,6 +167,7 @@ class _StartPage extends State<StartPage> {
                         animateRight = !animateRight;
                         rateBlue = 430;
                         rateOrange = 300;
+                        firstRun = false;
                       },
                     ),
                     child: const Icon(Icons.arrow_back_ios),

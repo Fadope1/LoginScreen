@@ -6,14 +6,13 @@ void main() {
   runApp(const MainPage());
 }
 
-// test
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: "Fabians Showcase app",
-        initialRoute: '/',
+        initialRoute: '/skill-list',
         routes: {
           '/': (context) => const StartPage(),
           '/skill-list': (context) => const SkillListPage(),
