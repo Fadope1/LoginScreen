@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:showcase/skill_list.dart';
 import 'package:showcase/start_page.dart';
 
+import '3dCardEffectPage.dart';
+import '3dListEffectPage.dart';
+
 void main() {
   runApp(const MainPage());
 }
@@ -12,11 +15,12 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: "Fabians Showcase app",
-        initialRoute: '/skill-list',
+        initialRoute: '/magic/card',
         routes: {
-          '/': (context) => const StartPage(),
+          '/login': (context) => const StartPage(),
           '/skill-list': (context) => const SkillListPage(),
-          // '/third': (context) => ThirdScreen(),
+          '/magic/list': (context) => const MagicListPage(),
+          '/magic/card': (context) => const MagicPage(),
         },
       );
 }

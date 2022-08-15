@@ -92,6 +92,14 @@ class CustomScaffold extends StatelessWidget {
                 child: Container(color: Colors.green, child: seachBar),
               ),
             ),
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.yellow,
+              ),
+            ),
           ],
         ),
       ),
