@@ -49,18 +49,21 @@ class MovableItem extends StatelessWidget {
     // make this a stack with background and child seperated 3d effect
     Offset offset =
         Offset(_offset.dx.clamp(-100, 100), _offset.dy.clamp(-100, 100));
+
+    Matrix4 transform = Matrix4.identity()
+      ..setEntry(3, 2, 0.01)
+      ..rotateX(
+        0.01 * offset.dy,
+      )
+      ..rotateY(
+        -0.01 * offset.dx,
+      );
+
     return Stack(
       children: [
         Transform(
           alignment: FractionalOffset.center,
-          transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.01)
-            ..rotateX(
-              0.01 * offset.dy,
-            )
-            ..rotateY(
-              -0.01 * offset.dx,
-            ),
+          transform: transform,
           child: background ??
               const Card(child: Padding(padding: EdgeInsets.all(20))),
         ),
@@ -72,14 +75,7 @@ class MovableItem extends StatelessWidget {
           // top: 60 + offset.dy,
           child: Transform(
             alignment: FractionalOffset.center,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.01)
-              ..rotateX(
-                0.01 * offset.dy,
-              )
-              ..rotateY(
-                -0.01 * offset.dx,
-              ),
+            transform: transform,
             child: child,
           ),
         ),

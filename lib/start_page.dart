@@ -19,7 +19,7 @@ class _StartPage extends State<StartPage> {
   double rateYellow = defaultWavePos + 500;
 
   bool firstRun =
-      true; // rather its the first time running the app -> only run certain animations once
+      true; // if its the first time running the app -> only run certain animations once
 
   bool animateRight = false;
 

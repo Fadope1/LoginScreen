@@ -85,6 +85,7 @@ class CustomScaffold extends StatelessWidget {
             ),
             Positioned(
               top: seachBarTop,
+              // extract to local var so its only calc once -> check if window size changed
               left: (window.width - searchBarWidth) / 2,
               child: SizedBox(
                 width: searchBarWidth,
