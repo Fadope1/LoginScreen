@@ -12,6 +12,7 @@ class _TestTransformState extends State<TestTransform> {
 
   @override
   Widget build(BuildContext context) {
+    // Offset(66.1, -69.1)
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -19,19 +20,16 @@ class _TestTransformState extends State<TestTransform> {
             onTap: () => setState(() {
               isPressed = !isPressed;
             }),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.01)
-                ..rotateX(
-                  0.01 * (isPressed ? 0 : 0),
-                )
-                ..rotateY(
-                  -0.01 * (isPressed ? 30 : 0),
-                ),
+            child: Animated3dRotation(
+              duration: const Duration(seconds: 1),
+              x: isPressed ? -70 : 0,
+              y: isPressed ? 66 : 0,
               child: const Card(
-                child:
-                    Padding(padding: EdgeInsets.all(20), child: Text("Test")),
+                elevation: 20,
+                child: Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Text("nice"),
+                ),
               ),
             ),
           ),
@@ -40,3 +38,27 @@ class _TestTransformState extends State<TestTransform> {
     );
   }
 }
+
+/**
+ GestureDetector(
+            onTap: () => setState(() {
+              isPressed = !isPressed;
+            }),
+            child: AnimatedContainer(
+              curve: Curves.linearToEaseOut,
+              duration: const Duration(milliseconds: 300),
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, 0.01)
+                ..rotateX(
+                  0.01 * (isPressed ? -69.1 : 0),
+                )
+                ..rotateY(
+                  -0.01 * (isPressed ? 66.1 : 0),
+                ),
+              child: const Card(
+                child:
+                    Padding(padding: EdgeInsets.all(20), child: Text("Test")),
+              ),
+            ),
+          ),
+ */

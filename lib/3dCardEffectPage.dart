@@ -59,6 +59,9 @@ class MovableItem extends StatelessWidget {
         -0.01 * offset.dx,
       );
 
+    // print(transform);
+    // print(offset);
+
     return Stack(
       children: [
         Transform(
